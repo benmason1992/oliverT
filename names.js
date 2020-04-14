@@ -1,15 +1,28 @@
 const fs = require("fs");
+const readline = require('readline');
+const stream = require('stream');
 
-const regex = /\b(\w+)\b/g;
+
+const names = () => {
+    const instream = fs.createReadStream('first-names.txt');
+    const outstream = new stream;
+    const rl = readline.createInterface(instream, outstream);
+
+    const listNames = {};
 
 
-fs.readFile('first-names.txt', 'utf8', function(err, data){ 
- 
-    // Display the file content
-    let list = data; 
-    let lower = list.toLowerCase();
-    let names = lower.match(regex);
+    rl.on('line', function (line) {
+        // process line here
+        //To do - what happens if the line is blank, what happens if there is a null value.
+        let lower = line.toLowerCase();
+        listNames[lower] = 0; 
+    });
 
-    console.log(names);
+    rl.on('close', function () {
+        // do something on finish here
 
-}); 
+        console.log('listNames', listNames);
+    });
+}
+
+return names();
