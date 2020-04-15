@@ -1,28 +1,20 @@
-const fs = require("fs");
+const fs = require('fs');
 const readline = require('readline');
 const stream = require('stream');
 
-
-const names = () => {
+const getNames = async () => new Promise((resolve, reject) => { //returns a promise as result
     const instream = fs.createReadStream('first-names.txt');
-    const outstream = new stream;
+    const outstream = new stream();
     const rl = readline.createInterface(instream, outstream);
-
     const listNames = {};
 
-
-    rl.on('line', function (line) {
-        // process line here
-        //To do - what happens if the line is blank, what happens if there is a null value.
-        let lower = line.toLowerCase();
-        listNames[lower] = 0; 
+    rl.on('line', line => {
+        const lower = line.toLowerCase(); //book to lower case
+        listNames[lower] = 0; //give object keys a value of 0 to start with.
     });
+    rl.on('error', reject); // reject if errors
+    rl.on('close', () => resolve(listNames)); //resolve if succeed
+});
+console.log(getNames);
 
-    rl.on('close', function () {
-        // do something on finish here
-
-        console.log('listNames', listNames);
-    });
-}
-
-return names();
+module.exports = getNames;
