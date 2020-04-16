@@ -2,9 +2,9 @@ const fs = require('fs');
 const { getBookContent } = require('./book.js');
 const { getNames } = require('./names.js');
 
-(async () => {
-    const names = await getNames(); // iife wait for promise for names
-    const words = await getBookContent(); // iife wait for promise for book
+(async () => { // iife is immediately invoked
+    const names = await getNames(); //pauses and awaits the getNames() held in names.js
+    const words = await getBookContent(); //pauses and awaits the getBookContent() held in book.js
 
     const result = words.reduce((map, word) => {
         if (typeof map[word] !== 'undefined') map[word] += 1; //if name is not undefined and appears in words +1 to key value.
@@ -21,8 +21,7 @@ const { getNames } = require('./names.js');
     const obj = Object.assign(...skim.map(([key, val]) => ({ [key]: val }))); //convert array back to object
     // console.log(obj)
 
-    const stringify = JSON.stringify(obj, null, 1);
+    const stringify = JSON.stringify(obj, null, 1); // stringify before adding writing to .json file.
     // console.log(stringify);
     fs.writeFileSync('mentionedNames.json', stringify);
-
 })();
