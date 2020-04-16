@@ -7,7 +7,7 @@ const { getNames } = require('./names.js');
     const words = await getBookContent(); // iife wait for promise for book
 
     const result = words.reduce((map, word) => {
-        if (typeof map[word] !== "undefined") map[word] += 1; //if name is not undefined and appears in words +1 to key value.
+        if (typeof map[word] !== 'undefined') map[word] += 1; //if name is not undefined and appears in words +1 to key value.
         return map;
     }, names);
     // console.log(result);
@@ -23,6 +23,6 @@ const { getNames } = require('./names.js');
 
     const stringify = JSON.stringify(obj, null, 1);
     // console.log(stringify);
-    fs.writeFileSync("mentionedNames.txt", stringify);
+    fs.writeFileSync('mentionedNames.json', stringify);
 
 })();
