@@ -15,6 +15,5 @@ const getNames = async () => new Promise((resolve, reject) => { //returns a prom
     rl.on('error', reject); // reject if errors
     rl.on('close', () => resolve(listNames)); //resolve if succeed
 });
-console.log(getNames);
 
-module.exports = getNames;
+exports.getNames = getNames;

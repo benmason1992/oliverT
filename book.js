@@ -12,5 +12,5 @@ const getBookContent = async () => new Promise(async (resolve, reject) => {
     }
 });
 
-module.exports = getBookContent;
+exports.getBookContent = getBookContent;
 
