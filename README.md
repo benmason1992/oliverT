@@ -16,7 +16,7 @@ Also, be sure to have `git` available in your PATH, `npm` might need it (You can
 ## Install
 
     $ git clone https://github.com/benmason1992/oliverT
-    $ cd PROJECT_TITLE
+    $ cd oliverT
     $ npm install
 
 ## Running the project
