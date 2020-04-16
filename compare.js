@@ -18,9 +18,11 @@ const { getNames } = require('./names.js');
     const skim = entries.filter(f => f[1] != 0).sort((a, b) => b[1] - a[1]); //filter array to remove no mentions, then sort from highest to lowest.
     // console.log(skim);
 
-    var obj = Object.assign(...skim.map(([key, val]) => ({ [key]: val })))
-    fs.writeFileSync("mentionedNames.txt", JSON.stringify(obj, null, 1), "UTF-8");
-
+    const obj = Object.assign(...skim.map(([key, val]) => ({ [key]: val }))); //convert array back to object
     // console.log(obj)
+
+    const stringify = JSON.stringify(obj, null, 1);
+    // console.log(stringify);
+    fs.writeFileSync("mentionedNames.txt", stringify);
 
 })();
